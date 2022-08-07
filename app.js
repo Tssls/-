@@ -7,6 +7,7 @@ const app = express();
 // 接收 post 请求 JSON 格式数据
 const json = express.json({type: '*/json'});
 const loginRouter = require('./router/login');
+const h5queryRouter = require('./router/h5query');
 const operateStoreRouter = require('./router/operateStores');
 
 app.use(cors());
@@ -25,6 +26,7 @@ app.use(function ( req, res, next) {
 app.use(expressJWT({ secret: 'liuhuan' }).unless({ path: [/^\/api\//] }));
 
 app.use('/api', loginRouter);
+app.use('/api', h5queryRouter);
 app.use('/main',operateStoreRouter);
 
 app.use(function (err, req, res, next) {
